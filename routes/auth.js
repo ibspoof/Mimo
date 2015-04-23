@@ -5,6 +5,7 @@ exports.login = function (req, res)
 {
 	if (req.cookieData != undefined && req.cookieData.userId != undefined) {
 		res.redirect('/user');
+		return;
 	}
 
 	res.render('auth/login');
