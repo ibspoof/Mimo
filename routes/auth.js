@@ -29,10 +29,10 @@ exports.login_post = function (req, res)
 			CorsaHelper.saveCookie(res, cookieData);
 			res.redirect('/user');
 			return;
+		} else {
+			res.render('auth/login', { msg: "Unable to login, please try again" });
 		}
 	});
-
-	res.render('auth/login', { msg: "Unable to login, please try again" });
 };
 
 
