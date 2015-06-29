@@ -2,7 +2,7 @@
 
 
 Mimo is a HTTP/API Mocking Platform that enables you to Mock APIs.
-Emulations can be simple responses with a JSON body and headers, or they can be dynamically changed using JavaScript functions. 
+Emulations can be simple responses with a JSON body and headers, or they can be dynamically changed using JavaScript functions.
 
 The purpose of creating Mimo was to enable a single user or a group of users to emulate their own APIs or HTTP requests. This could be for testing positive and negative scenarios, mocking an external API locally or as testing environment for other developers to use while the full API is being developed.
 
@@ -55,6 +55,13 @@ A full list of available functions can be found [here](docs/functions.md).
 
 Note: you must have node.js binaries installed and in your PATH to work
 
+### Production Setup
+
+When not running Mimo locally and wanting to run more threads use the following method.  Mimo will create 1 thread per core automatically and launch on port 8000.
+
+1. Start node: `export NODE_ENV=production; node app.js`
+2. Open: http://localhost:8000 in your browser
+
 
 ## Data Storage
 
@@ -69,6 +76,8 @@ Mimo is built using [Express.js](http://expressjs.com), [Angular.js](https://ang
 
 
 ## Issues
-Please use the [GitHub Issues](https://github.com/shutterfly/Mimo/issues) to report any problems.
+Please use the [GitHub Issues](https://github.com/ibspoof/Mimo/issues) to report any problems.
 
 
+## Other
+If you are looking for a Express v3.x and node 0.10 compatible version please visit: https://github.com/ibspoof/Mimo/tree/Express3Compatible

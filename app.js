@@ -1,15 +1,22 @@
 /**
- * Module dependencies.
- */
+* Module dependencies.
+*/
 
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var fs = require('fs');
-var qs = require('querystring');
-var app = express();
-var persist = require("persist");
+var express = require('express')
+, http = require('http')
+, path = require('path')
+, fs = require('fs')
+, qs = require('querystring')
+, persist = require("persist")
+, morgan = require('morgan')
+, cookieParser = require('cookie-parser')
+, methodOverride = require('method-override')
+, errorHandler = require('errorhandler')
+, hbs = require('hbs');
+
 var CorsaHelper = require('./lib/Corsa/helper');
+
+var app = express();
 
 GLOBAL.hash = "dsfsd$@@Wdsafasd23e8";
 GLOBAL.cookieHash = "dsf*jasda9#@#(@dsd";
@@ -40,23 +47,20 @@ app.use(function (req, res, next)
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.cookieParser());
-app.use(express.methodOverride());
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(app.router);
 
 // overide jade with Handlebars
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 
-var hbs = require('hbs');
 hbs.registerPartials('./views/partials');
 
 // development only
 if ('development' == app.get('env')) {
-	app.use(express.errorHandler());
+	app.use(errorHandler());
 }
 
 
