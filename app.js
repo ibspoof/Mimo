@@ -46,7 +46,7 @@ app.use(function (req, res, next)
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(methodOverride());
@@ -55,14 +55,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // overide jade with Handlebars
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
-
-hbs.registerPartials('./views/partials');
+hbs.registerPartials(path.join(__dirname, '/views/partials'));
 
 // development only
 if ('development' == app.get('env')) {
 	app.use(errorHandler());
 }
-
 
 persist.connect({
 	driver: 'sqlite3',
