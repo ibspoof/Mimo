@@ -12,10 +12,10 @@ exports.post = function (req, res)
 	ResourceModel.where(q).all(GLOBAL.connection, function (err, application)
 	{
 		if (err) {
-			res.send(400, {});
+			res.status(400).send({});
 		}
 		else if (application.first() != undefined) {
-			res.send(400, "Path for App Already Exists");
+			res.status(400).send("Path for App Already Exists");
 			return;
 		} else {
 			var data = req.body;
@@ -30,7 +30,7 @@ exports.post = function (req, res)
 				data['valid'] = validInput.status;
 				data['validMsg'] = validInput.msg;
 
-				res.send(200, data)
+				res.status(200).send(data)
 			});
 		}
 	});
@@ -44,7 +44,7 @@ exports.index = function (req, res)
 		.all(GLOBAL.connection, function (err, resources)
 		{
 			if (err || resources.first() == undefined) {
-				res.send(404, "oh oh");
+				res.status(404).send("oh oh");
 				return;
 			} else {
 				var out = [];
@@ -74,7 +74,7 @@ exports.update = function (req, res)
 		data['valid'] = validInput.status;
 		data['validMsg'] = validInput.msg;
 
-		res.send(200, data)
+		res.status(200).send(data)
 	});
 
 };
@@ -99,7 +99,7 @@ exports.view = function (req, res)
 		.all(GLOBAL.connection, function (err, resource)
 		{
 			if (err || resource.first() == undefined) {
-				res.send(404, "oh oh");
+				res.status(404).send("View not found.");
 				return;
 			} else {
 				var out = resource.first();
@@ -107,4 +107,3 @@ exports.view = function (req, res)
 			}
 		});
 };
-

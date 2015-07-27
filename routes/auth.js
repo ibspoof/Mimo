@@ -95,7 +95,7 @@ exports.signup = function (req, res)
 exports.signup_post = function (req, res)
 {
 	if (req.postData['userPwd1'] != req.postData['userPwd2']) {
-		res.send(400, "Passwords do not match");
+		res.status(400).send("Passwords do not match");
 		return;
 	}
 
@@ -106,7 +106,7 @@ exports.signup_post = function (req, res)
 		'success', function (resource, created)
 		{
 			if (resource != null) {
-				res.send(400, "User exists, please login");
+				res.status(400).send("User exists, please login");
 				return;
 			}
 
@@ -126,13 +126,13 @@ exports.signup_post = function (req, res)
 
 			}).error(function (error)
 				{
-					console.log(error);
-					res.send(500, "Unable to save");
+					//console.log(error);
+					res.status(500).send("Unable to save");
 				});
 		}
 		, 'error', function (e)
 		{
-			res.send(400, "Not Unique");
+			res.status(400).send("Not Unique");
 			return;
 		}
 	);

@@ -10,10 +10,10 @@ exports.post = function (req, res)
 	ApplicationModel.where(q).all(GLOBAL.connection, function (err, application)
 	{
 		if (err) {
-			res.send(400, {});
+			res.status(400).send({});
 		}
 		else if (application.first() != undefined) {
-			res.send(400, "Application Short Name Already Exists");
+			res.status(400).send("Application Short Name Already Exists");
 		} else {
 
 			var data = req.body;
@@ -24,7 +24,7 @@ exports.post = function (req, res)
 			appModel.save(GLOBAL.connection, function ()
 			{
 				data['id'] = appModel.getId();
-				res.send(200, data)
+				res.status(200).send(data)
 			});
 		}
 	});
@@ -36,7 +36,7 @@ exports.index = function (req, res)
 	ApplicationModel.where({'user_id': req.cookieData.userId}).orderBy('short_name').all(GLOBAL.connection, function (err, application)
 	{
 		if (err || application.first() == undefined) {
-			res.send(404, {});
+			res.status(404).send({});
 			return;
 		} else {
 			var out = [];
@@ -60,7 +60,7 @@ exports.view = function (req, res)
 		.all(GLOBAL.connection, function (err, application)
 		{
 			if (err || application.first() == undefined) {
-				res.send(404, "oh oh");
+				res.status(404).send("oh oh");
 				return;
 			} else {
 				var out = application.first();
@@ -80,7 +80,7 @@ exports.update = function (req, res)
 	ApplicationModel.update(GLOBAL.connection, id, data, function ()
 	{
 		data['id'] = req.params.appId;
-		res.send(200, data)
+		res.status(200).send(data)
 	});
 };
 
@@ -100,4 +100,3 @@ exports.delete = function (req, res)
 		});
 	});
 };
-

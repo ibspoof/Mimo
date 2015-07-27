@@ -21,7 +21,7 @@ exports.index = function (req, res)
 				requestedUrl: req.originalUrl,
 				recommendedUrl: "/signUp"
 			};
-			res.send(404, output);
+			res.status(404).send(output);
 		} else {
 
 			var paths = {};
@@ -46,7 +46,7 @@ exports.index = function (req, res)
 					recommendedUrl: "/signUp"
 				};
 
-				return res.send(404, output);
+				return res.status(404).send(output);
 			}
 
 			var resourceSettings = appResources[pathInfo.key];
